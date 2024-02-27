@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useEffect, useState } from "react";
 import Home from "./components/screens/Home";
 import Onboarding from "./components/screens/Onboarding";
+import SignUp from "./components/screens/SignUp";
 
 // screen parameters
 export type RootStackParamList = {
@@ -36,6 +37,7 @@ export default function App() {
       >
         <Stack.Screen name="Onboarding" component={Onboarding} />
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="SignUp" component={SignUp} />
       </Stack.Navigator>
     </NavigationContainer>
   );

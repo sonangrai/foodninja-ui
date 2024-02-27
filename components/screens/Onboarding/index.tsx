@@ -1,18 +1,45 @@
 import { Image, useColorScheme } from "react-native";
 import styled from "styled-components/native";
 import FoodButton from "../../../common/UI/FoodButton";
+import { useState } from "react";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../../App";
 
-function Onboarding() {
+type OnboardingProps = {
+  navigation: StackNavigationProp<RootStackParamList, "Home">;
+};
+
+function Onboarding({ navigation }: OnboardingProps) {
   const colorScheme = useColorScheme();
+  const [step, setStep] = useState<number>(0);
 
   return (
     <OnboardingView $dark={colorScheme != "light"}>
-      <Image source={require("../../../assets/onboard/illustration.png")} />
-      <Heading $dark={colorScheme != "light"}>Find your Comfort {"\n"} Food here</Heading>
+      <Image
+        source={
+          step == 0
+            ? require("../../../assets/onboard/illustration.png")
+            : require("../../../assets/onboard/illustration2.png")
+        }
+      />
+      <Heading $dark={colorScheme != "light"}>
+        {step == 0 ? `Find your Comfort \n Food here` : `Food Ninja is Where Your \n Comfort Food Lives`}
+      </Heading>
       <Info $dark={colorScheme != "light"}>
-        Here You Can find a chef or dish for every {"\n"} taste and color. Enjoy!
+        {step == 0
+          ? "Here You Can find a chef or dish for every \n taste and color. Enjoy!"
+          : "Enjoy a fast and smooth food delivery at \n your doorstep"}
       </Info>
-      <FoodButton title="Next" onPress={() => {}} />
+      <FoodButton
+        title="Next"
+        onPress={() => {
+          if (step == 0) {
+            setStep(1);
+          } else {
+            navigation.navigate("SignUp");
+          }
+        }}
+      />
     </OnboardingView>
   );
 }

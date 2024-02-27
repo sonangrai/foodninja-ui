@@ -5,6 +5,14 @@ import { useEffect, useState } from "react";
 import Home from "./components/screens/Home";
 import Onboarding from "./components/screens/Onboarding";
 
+// screen parameters
+export type RootStackParamList = {
+  Home: undefined;
+  Onboarding: undefined;
+  SignUp: undefined;
+  Details: { itemId: number; otherParam: string };
+};
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {

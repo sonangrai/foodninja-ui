@@ -21,9 +21,13 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Onboarding" component={Onboarding} options={{ title: "Home" }} />
-        <Stack.Screen name="Home" component={Home} options={{ title: "Home" }} />
+      <Stack.Navigator
+        screenOptions={(props) => ({
+          headerShown: false,
+        })}
+      >
+        <Stack.Screen name="Onboarding" component={Onboarding} />
+        <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
   );

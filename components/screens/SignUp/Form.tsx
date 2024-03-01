@@ -1,8 +1,10 @@
 import styled from "styled-components/native";
 import FoodButton from "../../../common/UI/FoodButton";
 import { Image, Platform, useColorScheme } from "react-native";
+import { useState } from "react";
 
 function Form() {
+  const [hidden, setHidden] = useState<boolean>(true);
   const colorScheme = useColorScheme();
 
   return (
@@ -21,10 +23,25 @@ function Form() {
         <Input $dark={colorScheme != "light"} placeholder="something@gmail.com" placeholderTextColor={"#3b3b3b"} />
       </TextInputItem>
 
-      {/* User Name  */}
+      {/* Password  */}
       <TextInputItem $dark={colorScheme != "light"}>
         <Image source={require("../../../assets/icons/Lock.png")} />
-        <Input $dark={colorScheme != "light"} placeholder="password" secureTextEntry placeholderTextColor={"#3b3b3b"} />
+        <Input
+          $dark={colorScheme != "light"}
+          placeholder="password"
+          secureTextEntry={hidden}
+          placeholderTextColor={"#3b3b3b"}
+        />
+        <EyeClick onPress={() => setHidden((hidden) => !hidden)}>
+          <Eye
+            $show={!hidden}
+            source={
+              colorScheme != "light"
+                ? require("../../../assets/icons/Show-dark.png")
+                : require("../../../assets/icons/Show.png")
+            }
+          />
+        </EyeClick>
       </TextInputItem>
 
       <FoodButton title="Create Account" onPress={() => {}} />
@@ -69,6 +86,7 @@ const TextInputItem = styled.View<{ $dark: boolean }>`
   margin-bottom: 12px;
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 20px;
   position: relative;
 `;
@@ -76,4 +94,14 @@ const TextInputItem = styled.View<{ $dark: boolean }>`
 const Input = styled.TextInput<{ $dark: boolean }>`
   color: ${({ $dark }) => ($dark ? "#f4f4f4" : "#000")};
   width: 100%;
+`;
+
+const Eye = styled.Image<{ $show: boolean }>`
+  overflow: hidden;
+`;
+
+const EyeClick = styled.TouchableOpacity`
+  position: absolute;
+  bottom: 60%;
+  right: 10px;
 `;

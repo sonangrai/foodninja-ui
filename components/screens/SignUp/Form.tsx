@@ -1,12 +1,12 @@
 import styled from "styled-components/native";
 import FoodButton from "../../../common/UI/FoodButton";
-import { Image, useColorScheme } from "react-native";
+import { Image, Platform, useColorScheme } from "react-native";
 
 function Form() {
   const colorScheme = useColorScheme();
 
   return (
-    <SignUpForm $dark={colorScheme != "light"}>
+    <SignUpForm $dark={colorScheme != "light"} behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <FormTitle $dark={colorScheme != "light"}>Sign Up for Free</FormTitle>
 
       {/* User Name  */}
@@ -38,7 +38,7 @@ function Form() {
 
 export default Form;
 
-const SignUpForm = styled.View<{ $dark: boolean }>`
+const SignUpForm = styled.KeyboardAvoidingView<{ $dark: boolean }>`
   width: 80%;
 `;
 
@@ -75,4 +75,5 @@ const TextInputItem = styled.View<{ $dark: boolean }>`
 
 const Input = styled.TextInput<{ $dark: boolean }>`
   color: ${({ $dark }) => ($dark ? "#f4f4f4" : "#000")};
+  width: 100%;
 `;

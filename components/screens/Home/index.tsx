@@ -4,6 +4,7 @@ import SearchBar from "./SearchBar";
 import NavBar from "../../../common/NavBar";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../App";
+import NearRestaurant from "./NearRestaurant";
 
 export type HomeProps = {
   navigation: StackNavigationProp<RootStackParamList, "Home">;
@@ -32,6 +33,8 @@ function Home({ navigation }: HomeProps) {
         </TopRow>
 
         <SearchBar />
+
+        <NearRestaurant />
       </ScrollView>
 
       <NavBar navigation={navigation} active="Home" />

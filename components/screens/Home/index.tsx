@@ -1,5 +1,6 @@
 import { Image, useColorScheme } from "react-native";
 import styled from "styled-components/native";
+import SearchBar from "./SearchBar";
 
 function Home() {
   const colorScheme = "light" || useColorScheme();
@@ -20,6 +21,8 @@ function Home() {
           <RedDot />
         </Notification>
       </TopRow>
+
+      <SearchBar />
     </HomeView>
   );
 }
@@ -27,10 +30,10 @@ function Home() {
 export default Home;
 
 const HomeView = styled.ImageBackground<{ $dark: boolean }>`
-  padding: 25px;
+  padding: 70px 25px 20px 25px;
   flex: 1;
-  justify-content: space-evenly;
-  background-color: ${({ $dark }) => ($dark ? "#000" : "transparent")};
+  gap: 18px;
+  background-color: ${({ $dark }) => ($dark ? "#000" : "#fff")};
 `;
 
 const TopRow = styled.View`

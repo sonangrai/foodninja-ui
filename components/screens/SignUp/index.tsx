@@ -4,7 +4,7 @@ import { RootStackParamList } from "../../../App";
 import styled from "styled-components/native";
 import Form from "./Form";
 
-type SignUpProps = {
+export type SignUpProps = {
   navigation: StackNavigationProp<RootStackParamList, "Home">;
 };
 
@@ -24,7 +24,7 @@ function SignUp({ navigation }: SignUpProps) {
         <Quote $dark={false}>Deliver Favorite Food</Quote>
       </TopPart>
 
-      <Form />
+      <Form navigation={navigation} />
     </SignUpView>
   );
 }

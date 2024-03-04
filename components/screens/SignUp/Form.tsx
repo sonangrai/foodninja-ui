@@ -2,8 +2,9 @@ import styled from "styled-components/native";
 import FoodButton from "../../../common/UI/FoodButton";
 import { Image, Platform, useColorScheme } from "react-native";
 import { useState } from "react";
+import { SignUpProps } from ".";
 
-function Form() {
+function Form({ navigation }: SignUpProps) {
   const [hidden, setHidden] = useState<boolean>(true);
   const colorScheme = useColorScheme();
 
@@ -44,7 +45,7 @@ function Form() {
         </EyeClick>
       </TextInputItem>
 
-      <FoodButton title="Create Account" onPress={() => {}} />
+      <FoodButton title="Create Account" onPress={() => navigation.navigate("Home")} />
 
       <Link onPress={() => {}}>
         <LinkText>already have an account?</LinkText>

@@ -74,7 +74,7 @@ const NavBarView = styled.View<{ $dark: boolean }>`
   position: sticky;
   bottom: 8px;
   padding: 15px 20px;
-  background: ${({ $dark }) => ($dark ? "@252525" : "#fff")};
+  background: ${({ $dark }) => ($dark ? "#252525" : "#fff")};
   box-shadow: ${({ $dark }) => ($dark ? "0px 0px 50px rgba(1, 2, 7, 0.5)" : "0px 0px 50px rgba(90, 108, 234, 0.1)")};
   border-radius: 15px;
   flex-direction: row;

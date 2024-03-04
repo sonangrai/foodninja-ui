@@ -8,11 +8,11 @@ interface IProps {
 
 function SectionTitle({ title, clickHandle }: IProps) {
   const colorScheme = useColorScheme();
-  const iDark = colorScheme != "light";
+  const isDark = colorScheme != "light";
 
   return (
     <SectionTitleView>
-      <Title>{title}</Title>
+      <Title $dark={isDark}>{title}</Title>
 
       <Link onPress={clickHandle}>
         <LinkText>View More</LinkText>
@@ -29,10 +29,10 @@ const SectionTitleView = styled.View`
   justify-content: space-between;
 `;
 
-const Title = styled.Text`
+const Title = styled.Text<{ $dark: boolean }>`
   font-size: 15px;
   font-weight: 600;
-  color: #000;
+  color: ${({ $dark }) => ($dark ? "#fff" : "#000")};
 `;
 
 const Link = styled.TouchableOpacity``;

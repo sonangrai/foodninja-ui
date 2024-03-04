@@ -1,4 +1,4 @@
-import { Image, ScrollView } from "react-native";
+import { Image, ScrollView, useColorScheme } from "react-native";
 import styled from "styled-components/native";
 import { HomeProps } from "../components/screens/Home";
 import { LinearGradient } from "expo-linear-gradient";
@@ -8,57 +8,60 @@ interface IProps extends HomeProps {
 }
 
 function NavBar({ navigation, active }: IProps) {
+  const colorScheme = useColorScheme();
+  const isDark = colorScheme != "light";
+
   return (
-    <NavBarView>
+    <NavBarView $dark={isDark}>
       <Item onPress={() => {}}>
         <ButtonWrap
           $active={active == "Home"}
-          colors={["#283930", "#24352e"]}
+          colors={isDark ? ["#283930", "#24352e"] : ["#edfcf3", "#e8faf2"]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
         >
           <Image source={require("../assets/icons/Home.png")} />
 
-          {active == "Home" && <ItemText>Home</ItemText>}
+          {active == "Home" && <ItemText $dark={isDark}>Home</ItemText>}
         </ButtonWrap>
       </Item>
 
       <Item onPress={() => {}}>
         <ButtonWrap
-          colors={["#283930", "#24352e"]}
+          colors={isDark ? ["#283930", "#24352e"] : ["#edfcf3", "#e8faf2"]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           $active={active == "Profile"}
         >
           <Image source={require("../assets/icons/Profile.png")} />
 
-          {active == "Profile" && <ItemText>Profile</ItemText>}
+          {active == "Profile" && <ItemText $dark={isDark}>Profile</ItemText>}
         </ButtonWrap>
       </Item>
 
       <Item onPress={() => {}}>
         <ButtonWrap
-          colors={["#283930", "#24352e"]}
+          colors={isDark ? ["#283930", "#24352e"] : ["#edfcf3", "#e8faf2"]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           $active={active == "Cart"}
         >
           <Image source={require("../assets/icons/Buy.png")} />
 
-          {active == "Cart" && <ItemText>Cart</ItemText>}
+          {active == "Cart" && <ItemText $dark={isDark}>Cart</ItemText>}
         </ButtonWrap>
       </Item>
 
       <Item onPress={() => {}}>
         <ButtonWrap
-          colors={["#283930", "#24352e"]}
+          colors={isDark ? ["#283930", "#24352e"] : ["#edfcf3", "#e8faf2"]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           $active={active == "Message"}
         >
           <Image source={require("../assets/icons/Chat.png")} />
 
-          {active == "Message" && <ItemText>Message</ItemText>}
+          {active == "Message" && <ItemText $dark={isDark}>Message</ItemText>}
         </ButtonWrap>
       </Item>
     </NavBarView>
@@ -67,13 +70,12 @@ function NavBar({ navigation, active }: IProps) {
 
 export default NavBar;
 
-const NavBarView = styled.View`
+const NavBarView = styled.View<{ $dark: boolean }>`
   position: sticky;
   bottom: 8px;
   padding: 15px 20px;
-
-  background: #252525;
-  box-shadow: 0px 0px 50px rgba(1, 2, 7, 0.5);
+  background: ${({ $dark }) => ($dark ? "@252525" : "#fff")};
+  box-shadow: ${({ $dark }) => ($dark ? "0px 0px 50px rgba(1, 2, 7, 0.5)" : "0px 0px 50px rgba(90, 108, 234, 0.1)")};
   border-radius: 15px;
   flex-direction: row;
   justify-content: space-between;
@@ -93,8 +95,8 @@ const ButtonWrap = styled(LinearGradient)<{ $active: boolean }>`
   border-radius: 15px;
 `;
 
-const ItemText = styled.Text`
+const ItemText = styled.Text<{ $dark: boolean }>`
   font-size: 12px;
-  color: #fff;
+  color: ${({ $dark }) => ($dark ? "#fff" : "#09051C")};
   font-weight: 500;
 `;

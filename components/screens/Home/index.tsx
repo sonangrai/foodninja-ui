@@ -3,7 +3,8 @@ import styled from "styled-components/native";
 import SearchBar from "./SearchBar";
 
 function Home() {
-  const colorScheme = "light" || useColorScheme();
+  const colorScheme = useColorScheme();
+
   return (
     <HomeView
       $dark={colorScheme != "light"}
@@ -14,9 +15,9 @@ function Home() {
       }
     >
       <TopRow>
-        <PageTitle> Find Your {"\n"} Favorite Food </PageTitle>
+        <PageTitle $dark={colorScheme != "light"}> Find Your {"\n"} Favorite Food </PageTitle>
 
-        <Notification>
+        <Notification $dark={colorScheme != "light"}>
           <Image source={require("../../../assets/icons/noti.png")} />
           <RedDot />
         </Notification>
@@ -43,10 +44,10 @@ const TopRow = styled.View`
   gap: 20px;
 `;
 
-const Notification = styled.View`
+const Notification = styled.View<{ $dark: boolean }>`
   position: relative;
   padding: 14px;
-  background: #fafdff;
+  background: ${({ $dark }) => ($dark ? "#252525" : "#fafdff")};
   box-shadow: 11px 28px 50px rgba(20, 78, 90, 0.2);
   border-radius: 15px;
 `;
@@ -65,7 +66,8 @@ const RedDot = styled.View`
   border: 1px solid #ffffff;
 `;
 
-const PageTitle = styled.Text`
+const PageTitle = styled.Text<{ $dark: boolean }>`
   font-size: 31px;
   font-weight: bold;
+  color: ${({ $dark }) => ($dark ? "#fff" : "#000")};
 `;

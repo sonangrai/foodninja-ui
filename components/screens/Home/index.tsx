@@ -1,8 +1,15 @@
-import { Image, useColorScheme } from "react-native";
+import { Image, ScrollView, useColorScheme } from "react-native";
 import styled from "styled-components/native";
 import SearchBar from "./SearchBar";
+import NavBar from "../../../common/NavBar";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../../App";
 
-function Home() {
+export type HomeProps = {
+  navigation: StackNavigationProp<RootStackParamList, "Home">;
+};
+
+function Home({ navigation }: HomeProps) {
   const colorScheme = useColorScheme();
 
   return (
@@ -14,16 +21,20 @@ function Home() {
           : require("../../../assets/PatternCommon-dark.png")
       }
     >
-      <TopRow>
-        <PageTitle $dark={colorScheme != "light"}> Find Your {"\n"} Favorite Food </PageTitle>
+      <ScrollView contentContainerStyle={{ gap: 18 }}>
+        <TopRow>
+          <PageTitle $dark={colorScheme != "light"}> Find Your {"\n"} Favorite Food </PageTitle>
 
-        <Notification $dark={colorScheme != "light"}>
-          <Image source={require("../../../assets/icons/noti.png")} />
-          <RedDot />
-        </Notification>
-      </TopRow>
+          <Notification $dark={colorScheme != "light"}>
+            <Image source={require("../../../assets/icons/noti.png")} />
+            <RedDot />
+          </Notification>
+        </TopRow>
 
-      <SearchBar />
+        <SearchBar />
+      </ScrollView>
+
+      <NavBar navigation={navigation} active="Home" />
     </HomeView>
   );
 }
@@ -33,7 +44,6 @@ export default Home;
 const HomeView = styled.ImageBackground<{ $dark: boolean }>`
   padding: 70px 25px 20px 25px;
   flex: 1;
-  gap: 18px;
   background-color: ${({ $dark }) => ($dark ? "#000" : "#fff")};
 `;
 
